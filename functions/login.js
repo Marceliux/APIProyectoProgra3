@@ -9,7 +9,7 @@ exports.loginUser = (email, password) =>
 		user.find({email})
 		.then(users => {
 			if (users.length == 0) {
-				reject({ status: 404, 'Usuario no encontrado!' });
+				reject({ status: 404, message: 'Usuario no encontrado!' });
 			} else {
 				return users[0];
 			}
