@@ -4,7 +4,6 @@ const user = require('../models/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const randomstring = require("randomstring");
-const config = require('../config/config.json');
 
 exports.changePassword = (email, password, newPassword) => 
 	new Promise((resolve, reject) => {
@@ -19,11 +18,11 @@ exports.changePassword = (email, password, newPassword) =>
 				user.hashed_password = hash;
 				return user.save();
 			} else {
-				reject({ status: 401, message: 'Invalid Old Password !' });
+				reject({ status: 401, message: 'Contraseña antigua inválida !' });
 			}
 		})
-		.then(user => resolve({ status: 200, message: 'Password Updated Sucessfully !' }))
-		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }));
+		.then(user => resolve({ status: 200, message: 'Contraseña actualizada correctamente !' }))
+		.catch(err => reject({ status: 500, message: 'Error de servidor !' }));
 	});
 
 exports.resetPasswordInit = email =>
@@ -44,15 +43,22 @@ exports.resetPasswordInit = email =>
 		})
 
 		.then(user => {
-			const transporter = nodemailer.createTransport(`smtps://${config.email}:${config.password}@smtp.gmail.com`);
+			//const transporter = nodemailer.createTransport(`smtps://${config.email}:${config.password}@smtp.gmail.com`);
+			var transporter = nodemailer.createTransport({
+				service: 'Gmail',
+				auth: {
+				  user: 'proyectoprograUTC@gmail.com',
+				  pass: 'proyectoprogra1!'
+				}
+			  });
 			const mailOptions = {
-    			from: `"${config.name}" <${config.email}>`,
+    			from: `"Administrador Proyecto Programacion 3 UTC" <proyectoprograUTC@gmail.com>`,
     			to: email,  
     			subject: 'Solicitud para restablecer contraseña', 
     			html: `Hola ${user.name},
 
     			     Su token para reiniciar la contraseña es <b>${random}</b>. 
-    			Sí estás viendo este correo desde un Android Device da click en este <a href="http://learn2crack/${random}">link</a>. 
+    			Sí estás viendo este correo desde un Android Device da click en este <a href="http://gymapp/${random}">link</a>. 
     			El token es válido por dos minutos.
 
     			Gracias,

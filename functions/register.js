@@ -25,7 +25,7 @@ exports.registerUser = (name, email, password) =>
 
 			if (err.code == 11000) {
 
-				reject({ status: 409, message: 'User Already Registered !' });
+				reject({ status: 409, message: 'Usuario ya existe!' });
 
 			} else {
 

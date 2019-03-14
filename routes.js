@@ -57,9 +57,9 @@ module.exports = router => {
 	router.put('/users/:id', (req,res) => {
 		if (checkToken(req)) {
 			const oldPassword = req.body.password;
-			const newPassword = req.body.newPassword;
+			const newPassword = req.body.newPassword;		
 			if (!oldPassword || !newPassword || !oldPassword.trim() || !newPassword.trim()) {
-				res.status(400).json({ message: 'Invalid Request !' });
+				res.status(400).json({ message: 'Su petición es invalida!' });
 			} else {
 				password.changePassword(req.params.id, oldPassword, newPassword)
 				.then(result => res.status(result.status).json({ message: result.message }))
