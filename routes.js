@@ -1,6 +1,5 @@
 'use strict';
 
-const auth = require('basic-auth');
 const jwt = require('jsonwebtoken');
 
 const register = require('./functions/register');
