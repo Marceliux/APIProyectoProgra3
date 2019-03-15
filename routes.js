@@ -15,6 +15,7 @@ module.exports = router => {
 
 	router.post('/authenticate', (req, res) => {
 		const credentials = req.body;
+		console.log(credentials);
 		if (!credentials) {
 			res.status(400).json({ message: 'Invalid Request !' });
 		} else {

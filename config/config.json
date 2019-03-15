@@ -1,1 +1,6 @@
-{}
+{ 
+    "name" : "Chelo",
+    "email" : "proyectoprograUTC@gmail.com",
+    "password" : "proyectoprogra1!",
+    "secret" : "CheDev"
+}

@@ -4,6 +4,7 @@ const user = require('../models/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const randomstring = require("randomstring");
+const config = require('../config/config.json');
 
 exports.changePassword = (email, password, newPassword) => 
 	new Promise((resolve, reject) => {
@@ -47,12 +48,12 @@ exports.resetPasswordInit = email =>
 			var transporter = nodemailer.createTransport({
 				service: 'Gmail',
 				auth: {
-				  user: 'proyectoprograUTC@gmail.com',
-				  pass: 'proyectoprogra1!'
+				  user: `${config.email}`,
+				  pass: `${config.pass}`
 				}
 			  });
 			const mailOptions = {
-    			from: `"Administrador Proyecto Programacion 3 UTC" <proyectoprograUTC@gmail.com>`,
+    			from: `"Administrador Proyecto Programacion 3 UTC" <${config.email}>`,
     			to: email,  
     			subject: 'Solicitud para restablecer contraseña', 
     			html: `Hola ${user.name},

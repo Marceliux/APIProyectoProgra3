@@ -9,7 +9,7 @@ exports.loginUser = (email, password) =>
 		user.find({email})
 		.then(users => {
 			if (users.length == 0) {
-				reject({ status: 404, message: 'Usuario no encontrado!' });
+				reject({status: 404, message: 'Usuario no encontrado!' });
 			} else {
 				return users[0];
 			}
@@ -19,7 +19,7 @@ exports.loginUser = (email, password) =>
 			const hashed_password = user.hashed_password;
 			if (bcrypt.compareSync(password, hashed_password)) {
 				//si son iguales envia un JSON con status 200 y un mensaje con el email
-				resolve({ status: 200, message: email });
+				resolve({status: 200, message: email });
 				//si no son iguales envia un JSON con status 401 y un mensaje
 			} else {
 				reject({ status: 401, message: 'Contraseña Incorrecta!' });
