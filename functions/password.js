@@ -4,7 +4,6 @@ const user = require('../models/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const randomstring = require("randomstring");
-const config = require('./../config/config.json');
 
 exports.changePassword = (email, password, newPassword) => 
 	new Promise((resolve, reject) => {
@@ -56,8 +55,9 @@ exports.resetPasswordInit = email =>
     			from: `"Administrador Proyecto Programacion 3 UTC" <proyectoprograUTC@gmail.com>`,
     			to: email,  
     			subject: 'Solicitud para restablecer contraseña', 
-    			html: `Hola ${user.name},
-
+				html: `
+				Hola ${user.name},
+					<br/><br/><br/>
     			     Su token para reiniciar la contraseña es <b>${random}</b>. 
     			Sí estás viendo este correo desde un Android Device da click en este <a href="http://gymapp/${random}">link</a>. 
     			El token es válido por dos minutos.
