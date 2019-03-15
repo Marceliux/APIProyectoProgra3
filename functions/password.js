@@ -4,7 +4,7 @@ const user = require('../models/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const randomstring = require("randomstring");
-const config = require('../config/config.json');
+const config = require('./../config/config.json');
 
 exports.changePassword = (email, password, newPassword) => 
 	new Promise((resolve, reject) => {
@@ -48,8 +48,8 @@ exports.resetPasswordInit = email =>
 			var transporter = nodemailer.createTransport({
 				service: 'Gmail',
 				auth: {
-				  user: `${config.email}`,
-				  pass: `${config.pass}`
+				  user: `proyectoprograUTC@gmail.com`,
+				  pass: `proyectoprogra1!`
 				}
 			  });
 			const mailOptions = {
@@ -72,12 +72,9 @@ exports.resetPasswordInit = email =>
 			console.log(info);
 			resolve({ status: 200, message: 'Busca en tu correo las instrucciones' })
 		})
-
 		.catch(err => {
-
 			console.log(err);
 			reject({ status: 500, message: 'Internal Server Error !' });
-
 		});
 	});
 
