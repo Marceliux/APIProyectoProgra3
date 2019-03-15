@@ -53,7 +53,7 @@ exports.resetPasswordInit = email =>
 				}
 			  });
 			const mailOptions = {
-    			from: `"Administrador Proyecto Programacion 3 UTC" <${config.email}>`,
+    			from: `"Administrador Proyecto Programacion 3 UTC" <proyectoprograUTC@gmail.com>`,
     			to: email,  
     			subject: 'Solicitud para restablecer contraseña', 
     			html: `Hola ${user.name},
