@@ -3,6 +3,7 @@
 const jwt = require('jsonwebtoken');
 
 const register = require('./functions/register');
+const form = require('./functions/form');
 const login = require('./functions/login');
 const profile = require('./functions/profile');
 const password = require('./functions/password');
@@ -14,9 +15,8 @@ module.exports = router => {
 
 	router.post('/authenticate', (req, res) => {
 		const credentials = req.body;
-		console.log(credentials);
 		if (!credentials) {
-			res.status(400).json({ message: 'Invalid Request !' });
+			res.status(400).json({ message: 'Peticion Invalida !' });
 		} else {
 			login.loginUser(credentials.email, credentials.pass)
 			.then(result => {
@@ -38,7 +38,7 @@ module.exports = router => {
 			register.registerUser(name, email, password)
 			.then(result => {
 				res.setHeader('Location', '/users/'+email);
-				res.status(result.status).json({ message: result.message })
+				res.status(result.status).json({emailInserted: email, message: result.message })
 			})
 			.catch(err => res.status(err.status).json({ message: err.message }));
 		}
@@ -51,6 +51,19 @@ module.exports = router => {
 			.catch(err => res.status(err.status).json({ message: err.message }));
 		} else {
 			res.status(401).json({ message: 'Invalid Token !' });
+		}
+	});
+
+	router.post('/info/:id', async (req,res) => {
+		let email = req.params.id;
+
+		if(email){
+			let result = await form.getId(email).catch(e =>console.log(e));
+			form.saveInfo(edad , estatura, peso, sexo, result.user._id)
+				.then(result => res.status(result.status).json({message: result.message}))
+				.catch(e => res.status(e.status).json({message: e.message}));
+		}else{
+			res.status(500).json({message: "Ocurrio un error, intentalo más tarde"});
 		}
 	});
 
@@ -72,6 +85,7 @@ module.exports = router => {
 
 	router.post('/users/:id/password', (req,res) => {
 		const email = req.params.id;
+		console.log(email);
 		const token = req.body.token;
 		const newPassword = req.body.password;
 		if (!token || !newPassword || !token.trim() || !newPassword.trim()) {

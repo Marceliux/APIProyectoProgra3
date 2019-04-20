@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 //sirve para extraer datos de metodos POST
 app.use(bodyParser.urlencoded({extended:true}));
 
-//Mensajes consola para dev
+//Mensajes consola para debugg
 app.use(logger('dev'));
 
 //Trae las rutas y las guarda en router
@@ -25,5 +25,5 @@ require('./routes')(router);
 //Le dice al servidor que utilize esas rutas
 app.use(router);
 
-//Prendemos el servidor en un puerto dependiendo el enviroment
+//Prendemos el servidor en un puerto dependiendo de el enviroment
 app.listen(process.env.PORT, ()=> console.log(`Escuchando peticiones en puerto ${process.env.PORT}`));

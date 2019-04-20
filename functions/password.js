@@ -41,7 +41,6 @@ exports.resetPasswordInit = email =>
 				return user.save();
 			}
 		})
-
 		.then(user => {
 			//const transporter = nodemailer.createTransport(`smtps://${config.email}:${config.password}@smtp.gmail.com`);
 			var transporter = nodemailer.createTransport({
@@ -69,12 +68,10 @@ exports.resetPasswordInit = email =>
 			return transporter.sendMail(mailOptions);
 		})
 		.then(info => {
-			console.log(info);
 			resolve({ status: 200, message: 'Busca en tu correo las instrucciones' })
 		})
 		.catch(err => {
-			console.log(err);
-			reject({ status: 500, message: 'Internal Server Error !' });
+			reject({ status: 500, message: 'Intentalo más tarde !' });
 		});
 	});
 
