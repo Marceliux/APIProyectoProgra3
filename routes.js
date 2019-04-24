@@ -85,7 +85,6 @@ module.exports = router => {
 
 	router.post('/users/:id/password', (req,res) => {
 		const email = req.params.id;
-		console.log(email);
 		const token = req.body.token;
 		const newPassword = req.body.password;
 		if (!token || !newPassword || !token.trim() || !newPassword.trim()) {
